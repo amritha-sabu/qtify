@@ -1,0 +1,10 @@
+.btndiv{
+    padding-right: 50px;
+}
+.button{
+    background-color: #121212;
+    color: #34C94B;
+    padding: 10px;
+    border-radius: 7px;
+    font-size: 16px;
+}
