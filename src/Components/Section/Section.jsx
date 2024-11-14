@@ -5,7 +5,8 @@ import Card from '../Card/Card';
 
 function Section(){
     const [songData, setSongData] = useState([]);
-    const [show, setShow] = useState(false);
+    const [showTopAlbums, setShowTopAlbums] = useState(false);
+    const [showNewAlbums, setShowNewAlbums] = useState(false);
 
     const fetchData = async() => {
         try{
@@ -18,38 +19,67 @@ function Section(){
         }
     };
 
-    const toggleDisplay = () => {
-        setShow(!show);
+    const toggleTopAlbumsDisplay = () => {
+        setShowTopAlbums(!showTopAlbums);
+    }
+    const toggleNewAlbumsDisplay = () => {
+        setShowNewAlbums(!showNewAlbums);
     }
 
     useEffect(() => {
         fetchData();
     },[]);
 
-    const displayData = show ? songData : songData.slice(0, 8);
+    const displayTopAlbumData = showTopAlbums ? songData : songData.slice(0, 8);
+    const displayNewAlbumData = showNewAlbums ? songData : songData.slice(0, 8);
 
     return(
         <div className={styles.container}>
-            <div className={styles.section}>
-                <p>Top Albums</p>
-                <button className={styles.button} onClick={toggleDisplay} >
-                    {show ? "Collapse" : "Show All"}
-                </button>
+            <div className={styles.topAlbums}>
+                <div className={styles.section}>
+                    <p>Top Albums</p>
+                    <button className={styles.button} onClick={toggleTopAlbumsDisplay} >
+                        {showTopAlbums ? "Collapse" : "Show All"}
+                    </button>
+                </div>
+                <div className={styles.cards}>
+                    {displayTopAlbumData.length ? (
+                        displayTopAlbumData.map((item) => (
+                            <Card 
+                            key={item.id}
+                            title={item.title}
+                            description={item.description}
+                            follows={item.follows}
+                            image={item.image}
+                            slug={item.slug}
+                            songs={item.songs}
+                            />
+                        ))
+                    ) : (<p>Loading...</p>)}
+                </div>
             </div>
-            <div className={styles.cards}>
-                {displayData.length ? (
-                    displayData.map((item) => (
-                        <Card 
-                        key={item.id}
-                        title={item.title}
-                        description={item.description}
-                        follows={item.follows}
-                        image={item.image}
-                        slug={item.slug}
-                        songs={item.songs}
-                        />
-                    ))
-                ) : (<p>Loading...</p>)}
+            <div className={styles.newAlbums}>
+                <div className={styles.section}>
+                    <p>New Albums</p>
+                    <button className={styles.button} onClick={toggleNewAlbumsDisplay} >
+                        {showNewAlbums ? "Collapse" : "Show All"}
+                    </button>
+                </div>
+                <div className={styles.cards}>
+                    {displayNewAlbumData.length ? (
+                        displayNewAlbumData.map((item) => (
+                            <Card 
+                            key={item.id}
+                            title={item.title}
+                            description={item.description}
+                            follows={item.follows}
+                            image={item.image}
+                            slug={item.slug}
+                            songs={item.songs}
+                            />
+                        ))
+                    ) : (<p>Loading...</p>)}
+                </div>
             </div>
         </div>
     );
