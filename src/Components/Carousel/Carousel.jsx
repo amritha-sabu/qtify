@@ -16,35 +16,6 @@ import { Pagination, Navigation } from 'swiper/modules';
 
 export default function Carousel({songsData}) {
   const [swiperRef, setSwiperRef] = useState(null);
-  // const [songTopAlbumsData, setSongTopAlbumsData] = useState([]);
-  //   const [songNewAlbumsData, setSongNewAlbumsData] = useState([]);
-
-//     const fetchTopAlbumsData = async() => {
-//       try{
-//           const response = await axios.get(`https://qtify-backend-labs.crio.do/albums/top`);
-//           console.log(response.data);
-//           setSongTopAlbumsData(response.data);
-//       }
-//       catch(error){
-//           console.log(error);
-//       }
-//   };
-//   const fetchNewAlbumsData = async() => {
-//       try{
-//           const response = await axios.get(`https://qtify-backend-labs.crio.do/albums/new`);
-//           console.log(response.data);
-//           setSongNewAlbumsData(response.data);
-//       }
-//       catch(error){
-//           console.log(error);
-//       }
-//   };
-
-
-//   useEffect(() => {
-//     fetchTopAlbumsData();
-//     fetchNewAlbumsData();
-// },[]);
 
   return (
     <>
@@ -61,22 +32,28 @@ export default function Carousel({songsData}) {
         className={styles.mySwiper}
         >
         {songsData.length ? (
-          songsData.map((item) => (
-            <SwiperSlide key={item.id} className={styles.swiperSlide}>
-              <Card
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                follows={item.follows}
-                image={item.image}
-                slug={item.slug}
-                songs={item.songs}
-              />
-            </SwiperSlide>
-          ))
+          songsData.map((item) => {
+            const follows = item.follows ? item.follows : item.likes;
+            const label = item.follows ? "Follows" : "Likes";
+            return (
+              <SwiperSlide key={item.id} className={styles.swiperSlide}>
+                <Card
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  follows={follows}
+                  image={item.image}
+                  slug={item.slug}
+                  songs={item.songs}
+                  label={label}
+                />
+              </SwiperSlide>
+            );
+          })
         ) : (
           <p>Loading...</p>
         )}
+
 
         <div className={styles.leftArrow}>
             <LeftArrow />

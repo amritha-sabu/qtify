@@ -6,6 +6,12 @@
     flex-direction: column;
 }
 
+.topAlbums,
+.newAlbums,
+.songs {
+    border-bottom: 2px solid #34C94B;
+}
+
 .section{
     display: flex;
     justify-content: space-between;
@@ -13,7 +19,8 @@
 }
 
 .section p{
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .button {
@@ -28,4 +35,9 @@
     flex-wrap: wrap;
     padding: 20px;
     justify-content: flex-start;
+}
+
+.songs{
+    background-color: #121212;
+    height: auto;
 }

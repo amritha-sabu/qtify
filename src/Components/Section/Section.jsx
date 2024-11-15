@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from './Section.module.css';
 import Card from '../Card/Card';
 import Carousel from "../Carousel/Carousel";
+import Tabs from "../Tabs/Tabs";
 
 function Section(){
     const [songTopAlbumsData, setSongTopAlbumsData] = useState([]);
@@ -89,6 +90,14 @@ function Section(){
                             />
                         ))
                     ) : (<Carousel songsData={songNewAlbumsData}/>)}
+                </div>
+            </div>
+            <div className={styles.songs}>
+                <div className={styles.section}>
+                    <p>Songs</p>
+                </div>
+                <div className={styles.tabs}>
+                    <Tabs />
                 </div>
             </div>
         </div>
