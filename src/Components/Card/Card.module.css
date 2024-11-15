@@ -1,13 +1,12 @@
 .component{
     width: 169px;
-    height: 242px;
+    height: 252px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
     background-color: #121212;
     color: #FFFF;
+    margin: 10px;
 }
 
 .card {
@@ -37,8 +36,9 @@
     margin-bottom: 8px;
 }
 
-.chip {
-
+.titleDiv{
+    height: auto;
+    margin-top: 5px;
 }
 
 .title{

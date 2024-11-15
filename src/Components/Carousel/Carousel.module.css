@@ -1,0 +1,50 @@
+.mySwiper {
+  width: 100%;
+  height: 300px;
+  background: #121212;
+  position: relative;
+}
+
+.swiperSlide {
+  text-align: center;
+  font-size: 18px;
+  flex: 0 0 auto; 
+  width: auto;    
+  height: 242px;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #121212;
+}
+
+/* .swiperSlide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+} */
+
+.leftArrow,
+.rightArrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.leftArrow {
+  left: 3px;
+}
+
+.rightArrow {
+  right: 3px;
+}
+
+.leftArrow img,
+.rightArrow img {
+  width: 30px;  
+  height: 30px;
+}

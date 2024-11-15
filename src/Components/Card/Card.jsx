@@ -30,7 +30,7 @@ function CardComponet({ id, description,  follows, image, slug, songs,  title}){
                 </Box>
                 </CardContent>
             </Card>
-            <div>
+            <div className={styles.titleDiv}>
                 <Typography variant="h6" className={styles.title}>
                     {title}
                 </Typography>

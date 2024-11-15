@@ -2,17 +2,29 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import styles from './Section.module.css';
 import Card from '../Card/Card';
+import Carousel from "../Carousel/Carousel";
 
 function Section(){
-    const [songData, setSongData] = useState([]);
+    const [songTopAlbumsData, setSongTopAlbumsData] = useState([]);
+    const [songNewAlbumsData, setSongNewAlbumsData] = useState([]);
     const [showTopAlbums, setShowTopAlbums] = useState(false);
     const [showNewAlbums, setShowNewAlbums] = useState(false);
 
-    const fetchData = async() => {
+    const fetchTopAlbumsData = async() => {
         try{
             const response = await axios.get(`https://qtify-backend-labs.crio.do/albums/top`);
             console.log(response.data);
-            setSongData(response.data);
+            setSongTopAlbumsData(response.data);
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
+    const fetchNewAlbumsData = async() => {
+        try{
+            const response = await axios.get(`https://qtify-backend-labs.crio.do/albums/new`);
+            console.log(response.data);
+            setSongNewAlbumsData(response.data);
         }
         catch(error){
             console.log(error);
@@ -27,11 +39,9 @@ function Section(){
     }
 
     useEffect(() => {
-        fetchData();
+        fetchTopAlbumsData();
+        fetchNewAlbumsData();
     },[]);
-
-    const displayTopAlbumData = showTopAlbums ? songData : songData.slice(0, 8);
-    const displayNewAlbumData = showNewAlbums ? songData : songData.slice(0, 8);
 
     return(
         <div className={styles.container}>
@@ -43,8 +53,8 @@ function Section(){
                     </button>
                 </div>
                 <div className={styles.cards}>
-                    {displayTopAlbumData.length ? (
-                        displayTopAlbumData.map((item) => (
+                    {showTopAlbums ? (
+                        songTopAlbumsData.map((item) => (
                             <Card 
                             key={item.id}
                             title={item.title}
@@ -55,7 +65,7 @@ function Section(){
                             songs={item.songs}
                             />
                         ))
-                    ) : (<p>Loading...</p>)}
+                    ) : (<Carousel songsData={songTopAlbumsData}/>)}
                 </div>
             </div>
             <div className={styles.newAlbums}>
@@ -66,8 +76,8 @@ function Section(){
                     </button>
                 </div>
                 <div className={styles.cards}>
-                    {displayNewAlbumData.length ? (
-                        displayNewAlbumData.map((item) => (
+                {showNewAlbums ? (
+                        songNewAlbumsData.map((item) => (
                             <Card 
                             key={item.id}
                             title={item.title}
@@ -78,7 +88,7 @@ function Section(){
                             songs={item.songs}
                             />
                         ))
-                    ) : (<p>Loading...</p>)}
+                    ) : (<Carousel songsData={songNewAlbumsData}/>)}
                 </div>
             </div>
         </div>
